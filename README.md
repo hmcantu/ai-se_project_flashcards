@@ -18,4 +18,4 @@ My first project in TripleTen's AI-Assisted Software Engineering program. This a
 
 ## Deployed Site
 
-Check out [this site]
+Check out [this site] 
