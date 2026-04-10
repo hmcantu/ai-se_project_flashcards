@@ -15,3 +15,7 @@ My first project in TripleTen's AI-Assisted Software Engineering program. This a
 * **Styling:** Tailwind CSS (or your specific framework)
 * **Version Control:** Git & GitHub
 * **Deployment:** Vercel / GitHub Pages
+
+## Deployed Site
+
+Check out [this site]
