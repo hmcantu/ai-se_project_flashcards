@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Git Cheatsheet: The Interactive Guide</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="page">
+    <header class="header">
+      <div class="header__container">
+        <h1 class="header__title">Git Cheatsheet</h1>
+        <p class="header__tagline">Master the commands, manage the code.</p>
+      </div>
+    </header>
+    <main class="cheatsheet">
+      <section class="section">
+        <h2 class="section__title">Setup & Configuration</h2>
+        <div class="accordion">
+          <div class="accordion__item">
+            <button class="accordion__header">git init</button>
+            <div class="accordion__panel">
+              <p class="accordion__text">
+                Initialize a brand new Git repository in your current folder.
+                This creates the hidden <code>.git</code> folder that tracks
+                everything.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <h2 class="section__title">The Basics</h2>
+        <div class="accordion">
+          <div class="accordion__item">
+            <button class="accordion__header">git status</button>
+            <div class="accordion__panel">
+              <p class="accordion__text">
+                See which files are modified, staged, or untracked. It's the
+                first thing you should run before any other command.
+              </p>
+            </div>
+          </div>
+          <div class="accordion__item">
+            <button class="accordion__header">git add [file]</button>
+            <div class="accordion__panel">
+              <p class="accordion__text">
+                Move a file from your working folder to the staging area. This
+                prepares it for your next save point.
+              </p>
+            </div>
+          </div>
+          <div class="accordion__item">
+            <button class="accordion__header">git commit -m "message"</button>
+            <div class="accordion__panel">
+              <p class="accordion__text">
+                Save your staged changes permanently to the repository history
+                with a descriptive message.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <h2 class="section__title">Remotes & Syncing</h2>
+        <div class="accordion">
+          <div class="accordion__item">
+            <button class="accordion__header">git push origin main</button>
+            <div class="accordion__panel">
+              <p class="accordion__text">
+                Upload your local commits to the primary remote repository
+                (usually GitHub).
+              </p>
+            </div>
+          </div>
+          <div class="accordion__item">
+            <button class="accordion__header">git pull origin main</button>
+            <div class="accordion__panel">
+              <p class="accordion__text">
+                Download the latest changes from the remote repository and merge
+                them into your local work.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copy">
+        Made for the TripleTen Curriculum. &copy; 2026 Git Cheatsheet.
+      </p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
