@@ -1,0 +1,80 @@
+.gallery__title {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    color: #1a1a1a;
+    line-height: 1;
+    font-weight: 700;
+    font-size: 40px;
+    margin: 0 0 40px;
+}
+
+.gallery {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    color: #1a1a1a;
+    line-height: 1;
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.gallery__list {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    color: #1a1a1a;
+    line-height: 1;
+    list-style: none;
+    display: contents;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.gallery__new-card-btn {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+    color: #1a1a1a80;
+    background-color: #d9d9d9;
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+    width: 325px;
+    height: 205px;
+    padding: 20px;
+    border-radius: 20px;
+    border-style: none;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.gallery__new-card-btn:hover {
+    background-color: #c5c5c5;
+    color: #1a1a1a;
+}
+
+.gallery__wrapping-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    gap: 20px;
+}
+
+.gallery__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.gallery__practice-btn {
+    /* Add some basic styling so it doesn't look like a default grey button */
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+    cursor: pointer;
+    font-weight: 700;
+}

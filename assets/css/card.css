@@ -1,36 +1,3 @@
-.gallery__title {
-    font-family: Inter, Arial, Helvetica, sans-serif;
-    color: #1a1a1a;
-    line-height: 1;
-    font-weight: 700;
-    font-size: 40px;
-    margin: 0 0 40px;
-}
-
-.gallery {
-    font-family: Inter, Arial, Helvetica, sans-serif;
-    color: #1a1a1a;
-    line-height: 1;
-    display: flex;
-    justify-content: start;
-    align-items: flex-start;
-    flex-direction: column;
-}
-
-.gallery__list {
-    font-family: Inter, Arial, Helvetica, sans-serif;
-    color: #1a1a1a;
-    line-height: 1;
-    list-style: none;
-    display: contents;
-    justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-}
-
 .card {
     position: relative;
     display: flex;
@@ -57,59 +24,18 @@
     margin: 0;
 }
 
-.card.card_color_green {
-    background-color: #64d583;
-}
+.card.card_color_green  { background-color: #64d583; }
+.card.card_color_blue   { background-color: #91A8F9; }
+.card.card_color_pink   { background-color: #EE92D7; }
+.card.card_color_yellow { background-color: #f5d770; }
+.card.card_color_orange { background-color: #ee955e; }
+.card.card_color_purple { background-color: #aa8ef0; }
+.card.card_color_white  { background-color: #ffffff; }
 
-.card.card_color_blue {
-    background-color: #91A8F9;
-}
-
-.card.card_color_pink {
-    background-color: #EE92D7;
-}
-
-.card.card_color_yellow { 
-    background-color: #f5d770; 
-}
-
-.card.card_color_orange { 
-    background-color: #ee955e; 
-}
-
-.card.card_color_purple {
-    background-color: #aa8ef0;
-}
-
-.gallery__new-card-btn {
-    font-family: Inter, Arial, Helvetica, sans-serif;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 1.2;
-    color: #1a1a1a80;
-    background-color: #d9d9d9;
-    display: flex;
-    justify-content: flex-start;
-    align-items: start;
-    width: 325px;
-    height: 205px;
-    padding: 20px;
-    border-radius: 20px;
-    border-style: none;
-    box-sizing: border-box;
-    cursor: pointer;
-}
-
-.gallery__new-card-btn:hover {
-    background-color: #c5c5c5;
+.card.card_color_gray,
+.card.card_new-card {
+    background-color: #e7e7e7;
     color: #1a1a1a;
-}
-
-.gallery__wrapping-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    width: 100%;
-    gap: 20px;
 }
 
 .card__row {
@@ -119,7 +45,6 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    pointer-events: none;
 }
 
 .card__count {
@@ -131,28 +56,32 @@
     margin: 0;
 }
 
-.card__link {
-    position: absolute;
-    inset: 0; 
-    z-index: 1;
-    text-decoration: none;
+.card__edit-btn,
+.card__delete-btn {
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    cursor: pointer;
+    box-shadow: none;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+    z-index: 3;
+}
+
+.card__edit-btn {
+    background-image: url("../images/flip.svg");
 }
 
 .card__delete-btn {
-    position: relative;
-    width: 24px;
-    height: 24px;
-    background-color: transparent;
     background-image: url("../images/delete.svg");
-    opacity: .5;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    z-index: 3;
-    pointer-events: auto;
 }
 
+.card__edit-btn:hover,
 .card__delete-btn:hover {
     opacity: 1;
 }

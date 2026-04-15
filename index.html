@@ -36,6 +36,16 @@
     </div>
   </section>
 
+  <section class="gallery" id="deck-view" style="display: none;">
+  <div class="gallery__header">
+    <h2 class="gallery__title"></h2> <button type="button" class="gallery__practice-btn">Practice</button>
+  </div>
+  <div class="gallery__wrapping-row">
+    <ul class="gallery__list"></ul>
+    <button type="button" class="gallery__new-card-btn">+ New card</button>
+  </div>
+</section>
+
   <section class="carousel" id="carousel-view" style="display: none;">
     <h2 class="carousel__title"></h2>
     <div class="carousel__row">
@@ -64,6 +74,16 @@
       </div>
     </li>
   </template>
+
+  <template id="flashcard-template">
+  <li class="card card_color_green">
+    <h3 class="card__title"></h3>
+    <div class="card__row">
+      <button type="button" class="card__edit-btn" aria-label="Edit flashcard"></button>
+      <button class="card__delete-btn" type="button" aria-label="Delete flashcard"></button>
+    </div>
+  </li>
+</template>
 
 </main>
         <footer class="footer">
