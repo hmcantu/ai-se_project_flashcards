@@ -8,19 +8,19 @@ const btnRight = document.querySelector('.carousel__btn_type_right');
 const btnFlip = document.querySelector('.carousel__btn_type_flip');
 
 let currentIndex = 0;
-let currentDeck = null;
+let currentcard = null;
 let showingQuestion = true;
 
-export function renderCarouselView(deck) {
-  currentDeck = deck;
+export function renderCarouselView(card) {
+  currentcard = card;
   currentIndex = 0;
   showingQuestion = true;
   updateDisplay();
 }
 
 function updateDisplay() {
-  const card = currentDeck.cards[currentIndex];
-  const colorName = hexToString(currentDeck.color);
+  const card = currentcard.cards[currentIndex];
+  const colorName = hexToString(currentcard.color);
 
   if (showingQuestion) {
     cardText.textContent = card.question;
@@ -32,10 +32,10 @@ function updateDisplay() {
     cardElement.classList.add('carousel__card_color_white');
   }
   
-  carouselTitle.textContent = `${currentDeck.name} • ${currentIndex + 1} / ${currentDeck.cards.length}`;
+  carouselTitle.textContent = `${currentcard.name} • ${currentIndex + 1} / ${currentcard.cards.length}`;
 
   btnLeft.disabled = (currentIndex === 0);
-  btnRight.disabled = (currentIndex === currentDeck.cards.length - 1);
+  btnRight.disabled = (currentIndex === currentcard.cards.length - 1);
   
   btnLeft.classList.toggle('carousel__btn_disabled', btnLeft.disabled);
   btnRight.classList.toggle('carousel__btn_disabled', btnRight.disabled);
@@ -55,7 +55,7 @@ btnLeft.addEventListener('click', () => {
 });
 
 btnRight.addEventListener('click', () => {
-  if (currentIndex < currentDeck.cards.length - 1) {
+  if (currentIndex < currentcard.cards.length - 1) {
     currentIndex++;
     showingQuestion = true;
     updateDisplay();

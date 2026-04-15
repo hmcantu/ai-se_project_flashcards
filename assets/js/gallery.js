@@ -1,4 +1,4 @@
-const decks = [
+const gallery = [
   {
     id: "html-basics",
     name: "HTML Basics",
@@ -760,13 +760,13 @@ const decks = [
 ];
 
 /**
- * Retrieves a deck object by its ID from the decks array.
+ * Retrieves a card object by its ID from the gallery array.
  *
- * @param {string} deckId - The unique identifier of the deck to retrieve
- * @returns {object|undefined} The deck object if found, undefined otherwise
+ * @param {string} cardId - The unique identifier of the card to retrieve
+ * @returns {object|undefined} The card object if found, undefined otherwise
  */
-function getDeckByID(deckId) {
-  return decks.find((deck) => deck.id === deckId);
+function getcardByID(cardId) {
+  return gallery.find((card) => card.id === cardId);
 }
 
-export { decks, getDeckByID };
+export { gallery, getcardByID };

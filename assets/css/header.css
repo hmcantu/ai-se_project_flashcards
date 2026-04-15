@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__title {
+    margin: 0;
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    line-height: 1;
+    font-weight: 900;
+    font-size: 24px;
+}
+
+.header__link {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    line-height: 1;
+    letter-spacing: -0.24px;
+    text-decoration: none;
+    color: #1a1a1a;
+}
+
+.header__link:hover {
+    text-decoration: underline;
+}

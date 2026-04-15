@@ -11,8 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/vendor/normalize.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/index.css" />
 </head>
 <body class="page">
    <header class="header">
@@ -21,7 +20,7 @@
     </h1>
     <nav class="nav">
       <ul class="nav__links">
-        <li><a href="#home" class="nav__link">My Decks</a></li>
+        <li><a href="#home" class="nav__link">My gallery</a></li>
         <li><a href="#about" class="nav__link">About</a></li>
       </ul>
     </nav>
@@ -29,11 +28,11 @@
 
 <main class="page__main-content">
   
-  <section class="decks" id="home">
-    <h2 class="decks__title">My Decks</h2>
-    <div class="decks__wrapping-row">
-      <ul class="decks__list"></ul> 
-      <button type="button" class="decks__new-deck-btn">+ New Deck</button>
+  <section class="gallery" id="home">
+    <h2 class="gallery__title">My gallery</h2>
+    <div class="gallery__wrapping-row">
+      <ul class="gallery__list"></ul> 
+      <button type="button" class="gallery__new-card-btn">+ New card</button>
     </div>
   </section>
 
@@ -50,18 +49,18 @@
   </section>
 
   <section id="not-found" style="display: none;">
-    <h2 class="decks__title">404 - Not Found</h2>
+    <h2 class="gallery__title">404 - Not Found</h2>
     <p>Oops! This page doesn't exist.</p>
     <a href="#home" class="nav__link">Return to Home</a>
   </section>
 
-  <template id="deck-template">
-    <li class="deck deck_color_green">
-      <a href="#" class="deck__link"></a>
-      <h3 class="deck__title"></h3>
-      <div class="deck__row">
-        <p class="deck__count"></p>
-        <button class="deck__delete-btn" type="button" aria-label="Delete this deck"></button>
+  <template id="card-template">
+    <li class="card card_color_green">
+      <a href="#" class="card__link"></a>
+      <h3 class="card__title"></h3>
+      <div class="card__row">
+        <p class="card__count"></p>
+        <button class="card__delete-btn" type="button" aria-label="Delete this card"></button>
       </div>
     </li>
   </template>

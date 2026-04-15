@@ -1,41 +1,41 @@
-import { decks, getDeckByID } from "./decks.js";
+import { gallery, getcardByID } from "./gallery.js";
 import { hexToString } from "./colorMap.js";
 import { renderCarouselView } from './carousel.js';
 
-const deckList = document.querySelector('.decks__list');
-const deckTemplate = document.querySelector('#deck-template').content;
+const cardList = document.querySelector('.gallery__list');
+const cardTemplate = document.querySelector('#card-template').content;
 
 const homeSection = document.querySelector('#home');
 const carouselSection = document.querySelector('#carousel-view');
 const notFoundSection = document.querySelector('#not-found');
 const mainContent = document.querySelector('.page__main-content');
 
-function createDeckEl(item) {
-  const deckElement = deckTemplate.querySelector('.deck').cloneNode(true);
-  const titleEl = deckElement.querySelector('.deck__title');
-  const countEl = deckElement.querySelector('.deck__count');
-  const deleteBtn = deckElement.querySelector('.deck__delete-btn');
-  const deckLink = deckElement.querySelector('.deck__link');
+function createcardEl(item) {
+  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  const titleEl = cardElement.querySelector('.card__title');
+  const countEl = cardElement.querySelector('.card__count');
+  const deleteBtn = cardElement.querySelector('.card__delete-btn');
+  const cardLink = cardElement.querySelector('.card__link');
 
   titleEl.textContent = item.name;
   countEl.textContent = `${item.cards.length} cards`;
-  deckLink.href = `#carousel/${item.id}`; 
+  cardLink.href = `#carousel/${item.id}`; 
 
   const colorName = hexToString(item.color);
-  deckElement.classList.remove('deck_color_green');
-  deckElement.classList.add(`deck_color_${colorName}`);
+  cardElement.classList.remove('card_color_green');
+  cardElement.classList.add(`card_color_${colorName}`);
   
   deleteBtn.addEventListener('click', (e) => {
     e.stopPropagation(); 
-    deckElement.remove();
+    cardElement.remove();
   });
 
-  return deckElement;
+  return cardElement;
 }
 
-function renderDeckEl(item) {
-  const deckEl = createDeckEl(item);
-  deckList.prepend(deckEl);
+function rendercardEl(item) {
+  const cardEl = createcardEl(item);
+  cardList.prepend(cardEl);
 }
 
 function handleRouting() {
@@ -49,17 +49,17 @@ function handleRouting() {
     notFoundSection.style.display = 'none';
   } 
   else if (hash.startsWith('#carousel/')) {
-    const deckId = hash.split('/')[1];
-    const deck = getDeckByID(deckId);
+    const cardId = hash.split('/')[1];
+    const card = getcardByID(cardId);
 
-    if (deck) {
+    if (card) {
       homeSection.style.display = 'none';
       notFoundSection.style.display = 'none';
       carouselSection.style.display = 'flex';
       
       mainContent.classList.add('page__main-content_location_carousel');
       
-      renderCarouselView(deck);
+      renderCarouselView(card);
     } else {
       show404();
     }
@@ -75,6 +75,6 @@ function show404() {
   notFoundSection.style.display = 'block';
 }
 
-decks.forEach(renderDeckEl);
+gallery.forEach(rendercardEl);
 window.addEventListener('hashchange', handleRouting);
 handleRouting();
