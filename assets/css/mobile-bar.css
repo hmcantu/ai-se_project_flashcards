@@ -4,23 +4,100 @@
     left: 0;
     width: 100%;
     height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     z-index: 10;
+    pointer-events: none;
     background: linear-gradient(
         to top, 
         rgba(255, 255, 255, 1) 35%, 
         rgba(255, 255, 255, 0) 100%
     );
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-@media (min-width: 768px) {
-    .mobile-bar {
+.mobile-bar button {
+    pointer-events: auto;
+}
+
+/* --- SHARED BUTTON BASE STYLES --- */
+.gallery__new-card-btn--mobile,
+.gallery__practice-btn--mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 44px;
+    border-radius: 8px;
+    border: none;
+    font-family: Inter, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px; 
+    transition: all 0.2s ease;
+    margin-top: 0;
+    margin-bottom: 20px;
+    height: 44px;
+}
+
+/* --- HOME VIEW (DEFAULT STATE) --- */
+.gallery__new-card-btn--mobile {
+    background-color: #000000;
+    color: #ffffff;
+    width: calc(100% - 40px);
+    max-width: 290px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.gallery__practice-btn--mobile {
+    display: none;
+}
+
+/* --- DECK VIEW (ACTIVE STATE) --- */
+.gallery__new-card-btn_location_deck-view {
+    background-color: #D1D1D1;
+    color: #1A1A1A;
+    left: 20px;
+    right: auto;
+    transform: none; 
+    width: calc(50% - 26px);
+    max-width: none;
+}
+
+
+.gallery__new-card-btn_location_deck-view ~ .gallery__practice-btn--mobile {
+    display: flex;
+    background-color: #1A1A1A;
+    color: #ffffff;
+    right: 20px;
+    left: auto;
+    width: calc(50% - 26px);
+    transform: none;
+}
+
+/* --- HIDE DESKTOP BUTTONS ON MOBILE --- */
+
+@media (max-width: 767px) {
+    .gallery__new-card-btn {
         display: none;
+    }
+
+    .gallery__practice-btn {
+        display: none;
+    }
+
+    .gallery__new-card-btn--mobile {
+        display: flex;
+    }
+
+    .gallery__new-card-btn_location_deck-view ~ .gallery__practice-btn--mobile {
+        display: flex;
     }
 }
 
+/* --- FOOTER & UTILITY --- */
 .footer {
     position: fixed;
     bottom: 0;
@@ -31,7 +108,17 @@
     padding: 10px 0;
     text-align: center;
 }
+
+@media (max-width: 767px) {
+    .gallery__header .gallery__practice-btn {
+        display: none;
+    }
+}
+
 @media (min-width: 768px) {
+    .mobile-bar {
+        display: none;
+    }
     .footer {
         position: static;
         padding: 40px 0;

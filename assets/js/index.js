@@ -1,7 +1,7 @@
 import { gallery, getcardByID } from "./gallery.js";
 import { hexToString } from "./colorMap.js";
 import { renderCarouselView } from './carousel.js';
-import { renderDeckView } from './deck-view.js'; // Import the new module
+import { renderDeckView } from './deck-view.js';
 
 let currentDeck = null; 
 
@@ -15,6 +15,25 @@ const notFoundSection = document.querySelector('#not-found');
 const mainContent = document.querySelector('.page__main-content');
 
 const practiceBtn = deckSection.querySelector('.gallery__practice-btn');
+
+/**
+ * NEW: Helper to update the mobile bar state
+ * @param {string} view - 'home', 'deck', or 'carousel'
+ */
+function updateMobileBar(view) {
+  const mobileNewCardBtn = document.querySelector('.gallery__new-card-btn--mobile');
+  const deckViewModifier = 'gallery__new-card-btn_location_deck-view';
+
+  if (!mobileNewCardBtn) return; // Guard clause
+
+  if (view === 'deck') {
+    // Show side-by-side buttons
+    mobileNewCardBtn.classList.add(deckViewModifier);
+  } else {
+    // Show single centered button
+    mobileNewCardBtn.classList.remove(deckViewModifier);
+  }
+}
 
 // Helper to allow deck-view.js to update currentDeck
 const updateCurrentDeck = (deck) => {
@@ -62,13 +81,18 @@ function handleRouting() {
     deckSection.style.display = 'none';
     carouselSection.style.display = 'none';
     notFoundSection.style.display = 'none';
+    
+    // Reset mobile bar for Home View
+    updateMobileBar('home');
   } 
   else if (hash.startsWith('#deck/')) {
     const deckId = hash.split('/')[1];
     const deck = getcardByID(deckId);
 
     if (deck) {
-      renderDeckView(deck, updateCurrentDeck); // Pass the updater function
+      renderDeckView(deck, updateCurrentDeck);
+      // Activate mobile bar for Deck View
+      updateMobileBar('deck');
     } else {
       show404();
     }
@@ -84,6 +108,9 @@ function handleRouting() {
       carouselSection.style.display = 'flex';
       mainContent.classList.add('page__main-content_location_carousel');
       renderCarouselView(card);
+      
+      // Usually, we keep the bar same as home or hide it in carousel
+      updateMobileBar('home'); 
     } else {
       show404();
     }
@@ -98,10 +125,18 @@ function show404() {
   deckSection.style.display = 'none';
   carouselSection.style.display = 'none';
   notFoundSection.style.display = 'block';
+  updateMobileBar('home');
 }
 
 // Global Listener (Set once)
 practiceBtn.addEventListener('click', () => {
+  if (currentDeck) {
+    location.hash = `#carousel/${currentDeck.id}`;
+  }
+});
+
+// Since the mobile practice button is a duplicate, we should add a listener to it too!
+document.querySelector('.gallery__practice-btn--mobile').addEventListener('click', () => {
   if (currentDeck) {
     location.hash = `#carousel/${currentDeck.id}`;
   }
