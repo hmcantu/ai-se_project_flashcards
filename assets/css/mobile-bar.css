@@ -124,3 +124,13 @@
         padding: 40px 0;
     }
 }
+
+.page_no-mobile-bar .mobile-bar,
+.page_no-mobile-bar::after {
+  display: none;
+}
+
+.page_no-mobile-bar .footer {
+  position: static;
+  margin-top: 20px;
+}

@@ -8,7 +8,7 @@
   margin: 106px 0 188px;
 }
 
-.carousel__row {
+.carousel__grid {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,114 +17,121 @@
 }
 
 .carousel__title {
-    font-weight: 500;
-    font-size: 14px;
-    color: #1a1a1a80;
-    margin: 0 0 32px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #1a1a1a80;
+  margin: 0 0 32px;
 }
- 
+
 .carousel__card {
-    font-family: Inter, Arial, Helvetica, sans-serif;
-    font-weight: 700;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-weight: 700;
     font-size: 32px;
-    color:#1a1a1a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-inline: 20px;
-    border-radius: 20px;
-    width: 365px;
-    height: 245px;
-    background-color: #d9d9d9;
+  color: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 20px;
+  border-radius: 20px;
+  width: 365px;
+  height: 245px;
+  background-color: #d9d9d9;
+  box-sizing: border-box;
+  text-align: center;
 }
 
+/* Color Modifiers */
 .carousel__card_color_white {
-    background-color: #ffffff !important;
-    color: #1a1a1a !important;
-    border: 1px solid #d9d9d9;
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+  border: 1px solid #d9d9d9;
 }
 
-.carousel__card_color_green {
-    background-color: #64d583;
-}
-
-.carousel__card_color_blue {
-    background-color: #91A8F9;
-}
-
-.carousel__card_color_pink {
-    background-color: #EE92D7;
-}
-
-.carousel__card_color_yellow { 
-    background-color: #f5d770; 
-}
-
-.carousel__card_color_orange { 
-    background-color: #ee955e; 
-}
-
-.carousel__card_color_purple {
-    background-color: #aa8ef0;
-}
+.carousel__card_color_green { background-color: #64d583; }
+.carousel__card_color_blue { background-color: #91A8F9; }
+.carousel__card_color_pink { background-color: #EE92D7; }
+.carousel__card_color_yellow { background-color: #f5d770; }
+.carousel__card_color_orange { background-color: #ee955e; }
+.carousel__card_color_purple { background-color: #aa8ef0; }
 
 .carousel__btn {
-    width: 44px;
-    height: 44px;
-    border: none;
-    border-radius: 8px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #fff;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 8px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  flex-shrink: 0;
 }
 
-.carousel__btn_type_left::before {
-    content: " ";
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-image: url(../images/left.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 50%;
-}
-
-.carousel__btn_type_right::before {
-    content: " ";
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-image: url(../images/right.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 50%;
-}
-
+.carousel__btn_type_left::before,
+.carousel__btn_type_right::before,
 .carousel__btn_type_flip::before {
-    content: " ";
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-image: url(../images/flip.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 50%;
+  content: " ";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 50%;
 }
 
-.carousel__btn:hover {
-    cursor: pointer;
-}
+.carousel__btn_type_left::before { background-image: url(../images/left.svg); }
+.carousel__btn_type_right::before { background-image: url(../images/right.svg); }
+.carousel__btn_type_flip::before { background-image: url(../images/flip.svg); }
 
-.carousel__btn:hover::before {
-    opacity: 100%;
-}
+.carousel__btn:hover { cursor: pointer; }
+.carousel__btn:hover::before { opacity: 100%; }
 
 .carousel__btn_disabled {
-    cursor: default;
-    pointer-events: none;
+  cursor: default;
+  pointer-events: none;
 }
 
 .carousel__btn_disabled::before {
-    opacity: 20%;
-    cursor: default;
+  opacity: 20%;
+}
+
+/* --- RESPONSIVE MOBILE GRID (TASK 5) --- */
+
+@media (max-width: 767px) {
+  .carousel__grid {
+    display: grid;
+    grid-template-columns: 44px 1fr 44px; 
+    grid-template-areas: 
+      "left  card  right"
+      ".     flip  .";
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .carousel__card {
+    grid-area: card;
+    width: 100%;
+    height: 245px;
+    font-size: 22px; 
+    line-height: 1.2;
+    padding: 24px;
+  }
+
+  .carousel__btn_type_left {
+    grid-area: left;
+  }
+
+  .carousel__btn_type_right {
+    grid-area: right;
+  }
+
+  .carousel__btn_type_flip {
+    grid-area: flip;
+    width: 100%;
+    max-width: 290px;
+    justify-self: center;
+    border: 1px solid #d9d9d9;
+    margin-top: 10px;
+  }
 }
