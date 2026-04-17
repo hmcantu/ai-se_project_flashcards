@@ -3,8 +3,15 @@
     color: #1a1a1a;
     line-height: 1;
     font-weight: 700;
-    font-size: 40px;
-    margin: 0 0 40px;
+    font-size: 24px;
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+    .gallery__title {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
 }
 
 .gallery {
@@ -41,8 +48,9 @@
     display: flex;
     justify-content: flex-start;
     align-items: start;
-    width: 325px;
-    height: 205px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 325 / 205;
     padding: 20px;
     border-radius: 20px;
     border-style: none;
@@ -57,9 +65,15 @@
 
 .gallery__wrapping-row {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr; 
     width: 100%;
     gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .gallery__wrapping-row {
+        grid-template-columns: repeat(4, 1fr); 
+    }
 }
 
 .gallery__header {
@@ -67,11 +81,16 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+    .gallery__header {
+        margin-bottom: 40px; 
+    }
 }
 
 .gallery__practice-btn {
-    /* Add some basic styling so it doesn't look like a default grey button */
     padding: 10px 20px;
     border-radius: 8px;
     border: 1px solid #d9d9d9;
