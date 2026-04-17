@@ -59,13 +59,16 @@
 }
 
 .gallery__new-card-btn--mobile {
-    width: 200px;
-    height: 50px;
+    width: 290px;
+    height: 56px;
     aspect-ratio: auto;
     justify-content: center;
     align-items: center;
     font-weight: 600;
-    margin: 0;
+    margin-bottom: 20px;
+    background-color: #000000; 
+    color: #ffffff;
+    border-radius: 12px;
 }
 
 .gallery__new-card-btn:hover {

@@ -20,3 +20,20 @@
         display: none;
     }
 }
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 20;
+    background-color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+@media (min-width: 768px) {
+    .footer {
+        position: static;
+        padding: 40px 0;
+    }
+}
