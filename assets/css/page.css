@@ -12,6 +12,13 @@
     line-height: 1;
 }
 
+@media (max-width: 767px) {
+    .page {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
 .page__main-content {
     flex-grow: 1;
     margin: 60px 0 138px;
