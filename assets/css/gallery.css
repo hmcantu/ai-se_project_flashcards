@@ -58,6 +58,16 @@
     cursor: pointer;
 }
 
+.gallery__new-card-btn--mobile {
+    width: 200px;
+    height: 50px;
+    aspect-ratio: auto;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    margin: 0;
+}
+
 .gallery__new-card-btn:hover {
     background-color: #c5c5c5;
     color: #1a1a1a;
