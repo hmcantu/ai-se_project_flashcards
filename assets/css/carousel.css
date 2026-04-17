@@ -38,6 +38,7 @@
   background-color: #d9d9d9;
   box-sizing: border-box;
   text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Color Modifiers */
@@ -63,6 +64,7 @@
   background-repeat: no-repeat;
   background-color: #fff;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .carousel__btn_type_left::before,
