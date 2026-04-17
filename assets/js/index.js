@@ -17,6 +17,19 @@ const pageElement = document.querySelector('.page');
 
 const practiceBtn = deckSection.querySelector('.gallery__practice-btn');
 
+/**
+ * Utility to manage view visibility
+ */
+function showView(currentSection, displayValue) {
+  const sections = [homeSection, deckSection, carouselSection, notFoundSection];
+  
+  sections.forEach((section) => {
+    section.style.display = 'none';
+  });
+
+  currentSection.style.display = displayValue;
+}
+
 function updateMobileBar(view) {
   const mobileNewCardBtn = document.querySelector('.gallery__new-card-btn--mobile');
   const deckViewModifier = 'gallery__new-card-btn_location_deck-view';
@@ -72,10 +85,7 @@ function handleRouting() {
   pageElement.classList.remove('page_no-mobile-bar');
 
   if (hash === '#home' || hash === '') {
-    homeSection.style.display = 'flex';
-    deckSection.style.display = 'none';
-    carouselSection.style.display = 'none';
-    notFoundSection.style.display = 'none';
+    showView(homeSection, 'flex');
     updateMobileBar('home');
   } 
   else if (hash.startsWith('#deck/')) {
@@ -83,6 +93,7 @@ function handleRouting() {
     const deck = getcardByID(deckId);
 
     if (deck) {
+      showView(deckSection, 'flex');
       renderDeckView(deck, updateCurrentDeck);
       updateMobileBar('deck');
     } else {
@@ -94,10 +105,7 @@ function handleRouting() {
     const card = getcardByID(cardId);
 
     if (card) {
-      homeSection.style.display = 'none';
-      deckSection.style.display = 'none';
-      notFoundSection.style.display = 'none';
-      carouselSection.style.display = 'flex';
+      showView(carouselSection, 'flex');
       mainContent.classList.add('page__main-content_location_carousel');
       pageElement.classList.add('page_no-mobile-bar');
       renderCarouselView(card);
@@ -111,10 +119,7 @@ function handleRouting() {
 }
 
 function show404() {
-  homeSection.style.display = 'none';
-  deckSection.style.display = 'none';
-  carouselSection.style.display = 'none';
-  notFoundSection.style.display = 'block';
+  showView(notFoundSection, 'block');
   pageElement.classList.add('page_no-mobile-bar');
 }
 
