@@ -28,6 +28,10 @@ The project has been significantly expanded to include a multi-view routing syst
 * **Design:** Figma (Source of truth for layouts and shadows)
 * **Version Control:** Git & GitHub
 
+## 🎥 Project Pitch
+
+Watch a walkthrough of the features and technical challenges: [Project Demo Video](https://www.loom.com/share/f49fc8621040481f93910c5f5f7966af)
+
 ## 🔗 Deployed Site
 
 Check out the live application here: [Flashcard App](https://hmcantu.github.io/ai-se_project_flashcards/)
