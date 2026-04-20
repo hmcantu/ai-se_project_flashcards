@@ -1,11 +1,11 @@
 import { hexToString } from "./colorMap.js";
+import { openModal } from './modal.js';
 
 const deckSection = document.querySelector('#deck-view');
 const deckTitle = deckSection.querySelector('.gallery__title');
 const deckCardList = deckSection.querySelector('.gallery__list');
 const flashcardTemplate = document.querySelector('#flashcard-template').content;
 
-// Sections for toggling visibility
 const homeSection = document.querySelector('#home');
 const carouselSection = document.querySelector('#carousel-view');
 const notFoundSection = document.querySelector('#not-found');
@@ -39,8 +39,11 @@ function createFlashcardEl(card, deck) {
 
   deleteBtn.addEventListener('click', (event) => {
     event.stopPropagation();
-    deck.cards = deck.cards.filter((deckCard) => deckCard.id !== card.id);
-    flashcardElement.remove();
+    
+    openModal(() => {
+      deck.cards = deck.cards.filter((deckCard) => deckCard.id !== card.id);
+      flashcardElement.remove();
+    });
   });
 
   return flashcardElement;
@@ -52,7 +55,7 @@ function renderFlashcardEl(card, deck) {
 }
 
 export function renderDeckView(deck, updateCurrentDeck) {
-  updateCurrentDeck(deck); // Update the currentDeck variable in index.js
+  updateCurrentDeck(deck); 
   
   deckTitle.textContent = deck.name;
   deckCardList.innerHTML = '';

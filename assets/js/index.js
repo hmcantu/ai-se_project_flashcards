@@ -2,6 +2,7 @@ import { gallery, getcardByID } from "./gallery.js";
 import { hexToString } from "./colorMap.js";
 import { renderCarouselView } from './carousel.js';
 import { renderDeckView } from './deck-view.js';
+import { openModal } from './modal.js';
 
 let currentDeck = null; 
 
@@ -17,16 +18,11 @@ const pageElement = document.querySelector('.page');
 
 const practiceBtn = deckSection.querySelector('.gallery__practice-btn');
 
-/**
- * Utility to manage view visibility
- */
 function showView(currentSection, displayValue) {
   const sections = [homeSection, deckSection, carouselSection, notFoundSection];
-  
   sections.forEach((section) => {
     section.style.display = 'none';
   });
-
   currentSection.style.display = displayValue;
 }
 
@@ -63,7 +59,9 @@ function createcardEl(item) {
   
   deleteBtn.addEventListener('click', (e) => {
     e.stopPropagation(); 
-    cardElement.remove();
+    openModal(() => {
+      cardElement.remove();
+    });
   });
 
   cardElement.addEventListener('click', (e) => {
