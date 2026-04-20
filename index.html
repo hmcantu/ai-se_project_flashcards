@@ -1,3 +1,4 @@
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,8 +31,10 @@
         <section class="gallery" id="home">
             <h2 class="gallery__title">My Decks</h2>
             <div class="gallery__wrapping-row">
-                <ul class="gallery__list"></ul> 
-                <button type="button" class="gallery__new-card-btn">+ New card</button>
+                <ul class="gallery__list"></ul>
+                <button type="button" class="card gallery__new-card-btn">
+                    + New card
+                </button>
             </div>
         </section>
 
@@ -42,26 +45,23 @@
             </div>
             <div class="gallery__wrapping-row">
                 <ul class="gallery__list"></ul>
-                <button type="button" class="gallery__new-card-btn gallery__new-card-btn_location_deck-view">
+                <button type="button" class="card gallery__new-card-btn gallery__new-card-btn_location_deck-view">
                     + New card
                 </button>
             </div>
         </section>
 
         <section class="carousel" id="carousel-view" style="display: none;">
-          <h2 class="carousel__title"></h2>
-          <div class="carousel__grid">
-             <button class="carousel__btn carousel__btn_type_left" type="button" aria-label="Previous card"></button>
-    
-           <div class="carousel__card">
-             <p class="carousel__card-text"></p>
-    </div>
-    
-    <button class="carousel__btn carousel__btn_type_right" type="button" aria-label="Next card"></button>
-    
-    <button class="carousel__btn carousel__btn_type_flip" type="button" aria-label="Flip card"></button>
-  </div>
-</section>
+            <h2 class="carousel__title"></h2>
+            <div class="carousel__grid">
+                <button class="carousel__btn carousel__btn_type_left" type="button" aria-label="Previous card"></button>
+                <div class="carousel__card">
+                    <p class="carousel__card-text"></p>
+                </div>
+                <button class="carousel__btn carousel__btn_type_right" type="button" aria-label="Next card"></button>
+                <button class="carousel__btn carousel__btn_type_flip" type="button" aria-label="Flip card"></button>
+            </div>
+        </section>
 
         <section id="not-found" style="display: none;">
             <h2 class="gallery__title">404 - Not Found</h2>
@@ -104,9 +104,7 @@
         </button>
     </div>
 
-    <script src="./assets/js/index.js" type="module"></script>
-
-<div class="modal">
+    <div class="modal">
         <div class="modal__container">
             <h2 class="modal__title">Are you sure?</h2>
             <p class="modal__text">This action cannot be undone.</p>
