@@ -18,7 +18,7 @@
 .header__title {
     font-family: 'Inter', Arial, sans-serif;
     font-weight: 900; 
-    font-size: 20px; 
+    font-size: 24px; 
     line-height: 1;
     letter-spacing: -0.01em;
     white-space: nowrap;
@@ -27,7 +27,7 @@
 
 @media (min-width: 768px) {
     .header__title {
-        font-size: 32px;
+        font-size: 24px;
         margin-bottom: 0;
     }
 }

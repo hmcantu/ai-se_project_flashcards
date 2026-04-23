@@ -1,10 +1,10 @@
-import { gallery, getcardByID } from "./gallery.js";
+import { decks, getDeckByID } from "./decks.js";
 import { hexToString } from "./colorMap.js";
 import { renderCarouselView } from './carousel.js';
 import { renderDeckView } from './deck-view.js';
 import { openModal } from './modal.js';
 
-let currentDeck = null; 
+let currentCard = null; 
 
 const cardList = document.querySelector('.gallery__list');
 const cardTemplate = document.querySelector('#card-template').content;
@@ -39,11 +39,11 @@ function updateMobileBar(view) {
   }
 }
 
-const updateCurrentDeck = (deck) => {
-  currentDeck = deck;
+const updateCurrentCard = (deck) => {
+  currentCard = deck;
 };
 
-function createcardEl(item) {
+function createCardEl(item) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const titleEl = cardElement.querySelector('.card__title');
   const countEl = cardElement.querySelector('.card__count');
@@ -72,8 +72,8 @@ function createcardEl(item) {
   return cardElement;
 }
 
-function rendercardEl(item) {
-  const cardEl = createcardEl(item);
+function renderCardEl(item) {
+  const cardEl = createCardEl(item);
   cardList.prepend(cardEl);
 }
 
@@ -88,11 +88,11 @@ function handleRouting() {
   } 
   else if (hash.startsWith('#deck/')) {
     const deckId = hash.split('/')[1];
-    const deck = getcardByID(deckId);
+    const deck = getDeckByID(deckId);
 
     if (deck) {
       showView(deckSection, 'flex');
-      renderDeckView(deck, updateCurrentDeck);
+      renderDeckView(deck, updateCurrentCard);
       updateMobileBar('deck');
     } else {
       show404();
@@ -100,7 +100,7 @@ function handleRouting() {
   }
   else if (hash.startsWith('#carousel/')) {
     const cardId = hash.split('/')[1];
-    const card = getcardByID(cardId);
+    const card = getDeckByID(cardId);
 
     if (card) {
       showView(carouselSection, 'flex');
@@ -122,17 +122,17 @@ function show404() {
 }
 
 practiceBtn.addEventListener('click', () => {
-  if (currentDeck) {
-    location.hash = `#carousel/${currentDeck.id}`;
+  if (currentCard) {
+    location.hash = `#carousel/${currentCard.id}`;
   }
 });
 
 document.querySelector('.gallery__practice-btn--mobile').addEventListener('click', () => {
-  if (currentDeck) {
-    location.hash = `#carousel/${currentDeck.id}`;
+  if (currentCard) {
+    location.hash = `#carousel/${currentCard.id}`;
   }
 });
 
-gallery.forEach(rendercardEl);
+decks.forEach(renderCardEl);
 window.addEventListener('hashchange', handleRouting);
 handleRouting();
