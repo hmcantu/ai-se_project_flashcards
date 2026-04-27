@@ -1,0 +1,119 @@
+.new-deck-view {
+  padding: 60px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.new-deck-view__title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.new-deck-view__form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.color-picker {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.color-picker__legend {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.color-picker__options {
+  display: flex;
+  gap: 8px;
+}
+
+.color-picker__radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.color-picker__label {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.1s ease;
+}
+
+.color-picker__label_color_green  { background-color: #8CE8AD; }
+.color-picker__label_color_blue   { background-color: #A0C3FF; }
+.color-picker__label_color_purple { background-color: #C9B1FF; }
+.color-picker__label_color_pink   { background-color: #FFB1E6; }
+.color-picker__label_color_orange { background-color: #FFB38A; }
+.color-picker__label_color_yellow { background-color: #FFE58A; }
+
+.color-picker__radio:checked + .color-picker__label {
+  border-color: #000;
+}
+
+.color-picker__label:hover {
+  filter: brightness(95%);
+}
+
+.color-picker__radio:focus + .color-picker__label,
+.new-deck-view__textarea:focus,
+.new-deck-view__submit-btn:focus {
+  outline: 2px solid #000;
+  outline-offset: 4px;
+}
+
+.new-deck-view__label {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.new-deck-view__textarea {
+  width: 100%;
+  min-height: 250px;
+  padding: 20px;
+  border: 1px solid #D9D9D9;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  background-color: #FFF;
+  resize: vertical;
+}
+
+.new-deck-view__submit-btn {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  width: fit-content;
+  transition: background-color 0.2s;
+}
+
+.new-deck-view__submit-btn:disabled {
+  background-color: #D9D9D9;
+  color: #808080;
+  cursor: not-allowed;
+}
+
+.new-deck-view__submit-btn:not(:disabled):hover {
+  background-color: #333;
+}

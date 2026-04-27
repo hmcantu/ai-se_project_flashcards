@@ -13,13 +13,14 @@ const homeSection = document.querySelector('#home');
 const deckSection = document.querySelector('#deck-view');
 const carouselSection = document.querySelector('#carousel-view');
 const notFoundSection = document.querySelector('#not-found');
+const newDeckSection = document.querySelector('#new-deck-view');
 const mainContent = document.querySelector('.page__main-content');
 const pageElement = document.querySelector('.page');
 
 const practiceBtn = deckSection.querySelector('.gallery__practice-btn');
 
 function showView(currentSection, displayValue) {
-  const sections = [homeSection, deckSection, carouselSection, notFoundSection];
+  const sections = [homeSection, deckSection, carouselSection, notFoundSection, newDeckSection];
   sections.forEach((section) => {
     section.style.display = 'none';
   });
@@ -86,6 +87,12 @@ function handleRouting() {
     showView(homeSection, 'flex');
     updateMobileBar('home');
   } 
+
+  else if (hash === '#new-deck-view') {
+    showView(newDeckSection, 'block');
+    pageElement.classList.add('page_no-mobile-bar');
+  }
+
   else if (hash.startsWith('#deck/')) {
     const deckId = hash.split('/')[1];
     const deck = getDeckByID(deckId);
@@ -131,6 +138,10 @@ document.querySelector('.gallery__practice-btn--mobile').addEventListener('click
   if (currentCard) {
     location.hash = `#carousel/${currentCard.id}`;
   }
+});
+
+document.querySelector('#home .gallery__new-card-btn').addEventListener('click', () => {
+  location.hash = '#new-deck-view';
 });
 
 decks.forEach(renderCardEl);

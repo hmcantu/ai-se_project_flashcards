@@ -62,6 +62,50 @@
             </div>
         </section>
 
+        <section class="new-deck-view" id="new-deck-view" style="display: none;">
+            <h2 class="new-deck-view__title">New Deck</h2>
+            <form class="new-deck-view__form" id="new-deck-form">
+              
+              <fieldset class="color-picker">
+                <legend class="color-picker__legend">Pick the deck color</legend>
+                <div class="color-picker__options">
+                  <input type="radio" name="color" value="green" id="color-green" class="color-picker__radio" checked>
+                  <label for="color-green" class="color-picker__label color-picker__label_color_green"></label>
+          
+                  <input type="radio" name="color" value="blue" id="color-blue" class="color-picker__radio">
+                  <label for="color-blue" class="color-picker__label color-picker__label_color_blue"></label>
+          
+                  <input type="radio" name="color" value="purple" id="color-purple" class="color-picker__radio">
+                  <label for="color-purple" class="color-picker__label color-picker__label_color_purple"></label>
+          
+                  <input type="radio" name="color" value="pink" id="color-pink" class="color-picker__radio">
+                  <label for="color-pink" class="color-picker__label color-picker__label_color_pink"></label>
+          
+                  <input type="radio" name="color" value="orange" id="color-orange" class="color-picker__radio">
+                  <label for="color-orange" class="color-picker__label color-picker__label_color_orange"></label>
+          
+                  <input type="radio" name="color" value="yellow" id="color-yellow" class="color-picker__radio">
+                  <label for="color-yellow" class="color-picker__label color-picker__label_color_yellow"></label>
+                </div>
+              </fieldset>
+          
+              <label class="new-deck-view__label">
+                Write the JSON array of cards so that it matches this schema
+                <textarea class="new-deck-view__textarea" name="deck-json" placeholder='{
+            "name": "Deck Name",
+            "cards": [
+              {
+                "question": "Question?",
+                "answer": "Answer"
+              }
+            ]
+          }'></textarea>
+              </label>
+          
+              <button type="submit" class="new-deck-view__submit-btn" disabled>Create the Deck</button>
+            </form>
+          </section>
+
         <section id="not-found" style="display: none;">
             <h2 class="gallery__title">404 - Not Found</h2>
             <p>Oops! This page doesn't exist.</p>
