@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Hailey Cantu">
-    <meta name="description" content="This site contains flashcards to help study main topics in Software Engineering">
-    <meta name="keywords" content="study guide, flashcards, learning materials">
     <title>Software Engineering Study Guide</title>
     <link rel="icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,6 +63,11 @@
             <h2 class="new-deck-view__title">New Deck</h2>
             <form class="new-deck-view__form" id="new-deck-form">
               
+              <label class="new-deck-view__label">
+                Deck Name
+                <input type="text" name="name" class="new-deck-view__input" placeholder="Enter deck name" required />
+              </label>
+
               <fieldset class="color-picker">
                 <legend class="color-picker__legend">Pick the deck color</legend>
                 <div class="color-picker__options">
@@ -90,16 +92,8 @@
               </fieldset>
           
               <label class="new-deck-view__label">
-                Write the JSON array of cards so that it matches this schema
-                <textarea class="new-deck-view__textarea" name="deck-json" placeholder='{
-            "name": "Deck Name",
-            "cards": [
-              {
-                "question": "Question?",
-                "answer": "Answer"
-              }
-            ]
-          }'></textarea>
+                Write the JSON array of cards
+                <textarea class="new-deck-view__textarea" name="cards" placeholder='{ "cards": [] }' required></textarea>
               </label>
           
               <button type="submit" class="new-deck-view__submit-btn" disabled>Create the Deck</button>
@@ -137,26 +131,6 @@
     <footer class="footer">
         <p class="footer__text">&copy; 2026 Hailey Cantu</p>
     </footer> 
-
-    <div class="mobile-bar">
-        <button type="button" class="gallery__new-card-btn gallery__new-card-btn--mobile">
-            + New card
-        </button>
-        <button type="button" class="gallery__practice-btn gallery__practice-btn--mobile">
-            Practice
-        </button>
-    </div>
-
-    <div class="modal">
-        <div class="modal__container">
-            <h2 class="modal__title">Are you sure?</h2>
-            <p class="modal__text">This action cannot be undone.</p>
-            <div class="modal__buttons">
-                <button type="button" class="modal__btn modal__cancel-btn">Cancel</button>
-                <button type="button" class="modal__btn modal__confirm-btn">Delete</button>
-            </div>
-        </div>
-    </div>
 
     <script src="./assets/js/index.js" type="module"></script>
 </body>
