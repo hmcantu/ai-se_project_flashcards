@@ -1,6 +1,32 @@
 import { decks } from "./decks.js";
 
-const HEX_DIGITS = /^[0-9a-fA-F]{6}$/;
+const errorModal = document.querySelector("#error-modal");
+const errorMsgElement = document.querySelector("#error-message");
+const closeErrorBtn = document.querySelector("#close-error-modal");
+
+closeErrorBtn.addEventListener("click", () => {
+  errorModal.classList.remove("modal_visible");
+});
+
+function showError(message) {
+  errorMsgElement.textContent = message;
+  errorModal.classList.add("modal_visible");
+}
+
+function validateName(name) {
+  if (typeof name !== "string" || name.length < 2 || name.length > 80) {
+    return null;
+  }
+  return name;
+}
+
+function parseJSON(jsonString) {
+  try {
+    return JSON.parse(jsonString);
+  } catch (error) {
+    return null;
+  }
+}
 
 function slugify(str) {
   return str
@@ -25,7 +51,7 @@ function normalizeColor(color) {
 const newDeckForm = document.querySelector("#new-deck-form");
 const submitBtn = newDeckForm.querySelector(".new-deck-view__submit-btn");
 
-export function disableSubmitBtn() {
+export function enableSubmitBtn() {
   if (submitBtn) {
     submitBtn.disabled = false;
   }
@@ -36,23 +62,38 @@ newDeckForm.addEventListener("submit", (e) => {
 
   const formData = new FormData(e.target);
   const values = Object.fromEntries(formData.entries());
+  const colorValue = normalizeColor(values.color);
 
-  try {
-    const jsonData = JSON.parse(values.cards);
-    const id = `${slugify(values.name)}-${Date.now()}`;
-
-    const newDeck = {
-      id: id,
-      name: values.name,
-      color: normalizeColor(values.color),
-      cards: jsonData.cards,
-    };
-
-    decks.push(newDeck);
-    window.location.hash = "deck/" + id;
-    e.target.reset();
-  } catch (err) {
-    console.error(err);
-    alert("Invalid JSON format.");
+  const jsonData = parseJSON(values.cards);
+  if (!jsonData) {
+    return showError("Invalid JSON syntax. Please check your formatting.");
   }
+
+  const validatedName = validateName(values.name);
+  if (!validatedName) {
+    return showError("Name must be a string between 2 and 80 characters.");
+  }
+
+  if (!Array.isArray(jsonData.cards)) {
+    return showError("The 'cards' field must be an array.");
+  }
+
+  if (typeof jsonData.color === "string") {
+    if (jsonData.color.toLowerCase() !== colorValue.toLowerCase()) {
+      return showError(`The color in the JSON (${jsonData.color}) does not match the selected color (${colorValue}).`);
+    }
+  }
+
+  const id = `${slugify(validatedName)}-${Date.now()}`;
+
+  const newDeck = {
+    id: id,
+    name: validatedName,
+    color: colorValue,
+    cards: jsonData.cards,
+  };
+
+  decks.push(newDeck);
+  window.location.hash = "deck/" + id;
+  e.target.reset();
 });

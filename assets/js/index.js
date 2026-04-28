@@ -3,7 +3,7 @@ import { hexToString } from "./colorMap.js";
 import { renderCarouselView } from './carousel.js';
 import { renderDeckView } from './deck-view.js';
 import { openModal } from './modal.js';
-import { disableSubmitBtn } from './new-deck-view.js';
+import { enableSubmitBtn } from "./new-deck-view.js";
 
 let currentCard = null; 
 
