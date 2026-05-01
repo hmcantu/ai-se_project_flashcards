@@ -22,3 +22,10 @@ export function getDeckById(id) {
   return fetch(`${baseUrl}/decks/${id}`, { headers })
     .then(processResponse);
 }
+
+export function deleteDeck(id) {
+  return fetch(`${baseUrl}/decks/${id}`, {
+    method: "DELETE",
+    headers: headers,
+  }).then(processResponse);
+}

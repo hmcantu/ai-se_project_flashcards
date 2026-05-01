@@ -3,7 +3,7 @@ import { renderCarouselView } from './carousel.js';
 import { renderDeckView } from './deck-view.js';
 import { openModal } from './modal.js';
 import { enableSubmitBtn } from "./new-deck-view.js";
-import { getDecks, getDeckById } from "./api.js";
+import { getDecks, getDeckById, deleteDeck } from "./api.js";
 import { fetchedDecks, getDeckByID } from "./decks.js";
 
 let currentCard = null; 
@@ -84,11 +84,26 @@ function createCardEl(item) {
   cardElement.classList.add(`card_color_${colorName}`);
   
   deleteBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); 
-    openModal(() => {
-      cardElement.remove();
-    });
+  e.stopPropagation(); 
+  openModal(() => {
+    // 1. Call the API
+    deleteDeck(item._id)
+      .then(() => {
+        // 2. Remove from the DOM
+        cardElement.remove();
+
+        // 3. Remove from the local cache (fetchedDecks)
+        const index = fetchedDecks.findIndex((d) => d._id === item._id);
+        if (index !== -1) {
+          fetchedDecks.splice(index, 1);
+        }
+      })
+      .catch((err) => {
+        showError("Failed to delete the deck. Please try again.");
+        console.error(err);
+      });
   });
+});
 
   cardElement.addEventListener('click', (e) => {
     if (e.target.closest('.card__delete-btn')) return;
