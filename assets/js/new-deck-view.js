@@ -1,4 +1,4 @@
-import { decks } from "./decks.js";
+import { fetchedDecks } from "./decks.js";
 
 const errorModal = document.querySelector("#error-modal");
 const errorMsgElement = document.querySelector("#error-message");
@@ -93,7 +93,7 @@ newDeckForm.addEventListener("submit", (e) => {
     cards: jsonData.cards,
   };
 
-  decks.push(newDeck);
-  window.location.hash = "deck/" + id;
+  fetchedDecks.push(newDeck);
+  window.location.hash = "#deck/" + id;
   e.target.reset();
 });

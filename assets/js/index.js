@@ -4,6 +4,7 @@ import { renderDeckView } from './deck-view.js';
 import { openModal } from './modal.js';
 import { enableSubmitBtn } from "./new-deck-view.js";
 import { getDecks, getDeckById } from "./api.js";
+import { fetchedDecks, getDeckByID } from "./decks.js";
 
 let currentCard = null; 
 
@@ -103,6 +104,9 @@ function renderHomeView() {
   
   getDecks()
     .then((decks) => {
+      fetchedDecks.length = 0;
+      fetchedDecks.push(...decks);
+
       decks.forEach((item) => {
         const cardEl = createCardEl(item);
         cardList.append(cardEl);
@@ -137,28 +141,26 @@ async function handleRouting() {
   }
   else if (hash.startsWith('#deck/')) {
     const deckId = hash.split('/')[1];
+    const deck = getDeckByID(deckId);
     
-    try {
-      const deck = await getDeckById(deckId); 
+    if (deck) {
       showView(deckSection, 'flex');
       renderDeckView(deck, updateCurrentCard);
       updateMobileBar('deck');
-    } catch (err) {
-      console.error(err);
+    } else {
       show404();
     }
   }
   else if (hash.startsWith('#carousel/')) {
     const cardId = hash.split('/')[1];
-    
-    try {
-      const card = await getDeckById(cardId);
+    const card = getDeckByID(cardId);
+
+    if (card) {
       showView(carouselSection, 'flex');
       mainContent?.classList.add('page__main-content_location_carousel');
       pageElement?.classList.add('page_no-mobile-bar');
       renderCarouselView(card);
-    } catch (err) {
-      console.error(err);
+    } else {
       show404();
     }
   } 
