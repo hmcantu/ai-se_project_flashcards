@@ -1,9 +1,9 @@
-import { decks, getDeckByID } from "./decks.js";
 import { hexToString } from "./colorMap.js";
 import { renderCarouselView } from './carousel.js';
 import { renderDeckView } from './deck-view.js';
 import { openModal } from './modal.js';
 import { enableSubmitBtn } from "./new-deck-view.js";
+import { getDecks, getDeckById } from "./api.js";
 
 let currentCard = null; 
 
@@ -19,6 +19,10 @@ const mainContent = document.querySelector('.page__main-content');
 const pageElement = document.querySelector('.page');
 
 const practiceBtn = deckSection?.querySelector('.gallery__practice-btn');
+
+/**
+ * UTILS
+ */
 
 function showView(currentSection, displayValue) {
   const sections = [homeSection, deckSection, carouselSection, notFoundSection, newDeckSection];
@@ -45,6 +49,25 @@ const updateCurrentCard = (deck) => {
   currentCard = deck;
 };
 
+export function showError(message) {
+  const errorModal = document.querySelector('#error-modal');
+  const errorMessage = document.querySelector('#error-message');
+  const closeBtn = document.querySelector('#close-error-modal');
+
+  if (errorModal && errorMessage) {
+    errorMessage.textContent = message;
+    errorModal.classList.add('modal_opened');
+
+    closeBtn.addEventListener('click', () => {
+      errorModal.classList.remove('modal_opened');
+    }, { once: true });
+  }
+}
+
+/**
+ * RENDERING
+ */
+
 function createCardEl(item) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const titleEl = cardElement.querySelector('.card__title');
@@ -54,7 +77,7 @@ function createCardEl(item) {
 
   titleEl.textContent = item.name;
   countEl.textContent = `${item.cards.length} cards`;
-  cardLink.href = `#deck/${item.id}`;
+  cardLink.href = `#deck/${item._id}`;
 
   const colorName = hexToString(item.color);
   cardElement.classList.add(`card_color_${colorName}`);
@@ -68,7 +91,7 @@ function createCardEl(item) {
 
   cardElement.addEventListener('click', (e) => {
     if (e.target.closest('.card__delete-btn')) return;
-    location.hash = `#deck/${item.id}`;
+    location.hash = `#deck/${item._id}`;
   });
 
   return cardElement;
@@ -77,13 +100,28 @@ function createCardEl(item) {
 function renderHomeView() {
   if (!cardList) return;
   cardList.innerHTML = ""; 
-  decks.forEach((item) => {
-    const cardEl = createCardEl(item);
-    cardList.append(cardEl);
-  });
+  
+  getDecks()
+    .then((decks) => {
+      decks.forEach((item) => {
+        const cardEl = createCardEl(item);
+        cardList.append(cardEl);
+      });
+    })
+    .catch((err) => {
+      showError("Can't fetch decks");
+      console.error(err);
+    })
+    .finally(() => {
+      handleRouting();
+    });
 }
 
-function handleRouting() {
+/**
+ * ROUTING
+ */
+
+async function handleRouting() {
   const hash = location.hash;
   mainContent?.classList.remove('page__main-content_location_carousel');
   pageElement?.classList.remove('page_no-mobile-bar');
@@ -91,37 +129,36 @@ function handleRouting() {
   if (hash === '#home' || hash === '' || hash === '#') {
     showView(homeSection, 'flex');
     updateMobileBar('home');
-    renderHomeView();
+    // Removed renderHomeView() from here to avoid loops
   } 
-
   else if (hash === '#new-deck-view') {
     showView(newDeckSection, 'block');
     pageElement?.classList.add('page_no-mobile-bar');
-    disableSubmitBtn();
   }
-
   else if (hash.startsWith('#deck/')) {
     const deckId = hash.split('/')[1];
-    const deck = getDeckByID(deckId);
-
-    if (deck) {
+    
+    try {
+      const deck = await getDeckById(deckId); 
       showView(deckSection, 'flex');
       renderDeckView(deck, updateCurrentCard);
       updateMobileBar('deck');
-    } else {
+    } catch (err) {
+      console.error(err);
       show404();
     }
   }
   else if (hash.startsWith('#carousel/')) {
     const cardId = hash.split('/')[1];
-    const card = getDeckByID(cardId);
-
-    if (card) {
+    
+    try {
+      const card = await getDeckById(cardId);
       showView(carouselSection, 'flex');
       mainContent?.classList.add('page__main-content_location_carousel');
       pageElement?.classList.add('page_no-mobile-bar');
       renderCarouselView(card);
-    } else {
+    } catch (err) {
+      console.error(err);
       show404();
     }
   } 
@@ -135,16 +172,20 @@ function show404() {
   pageElement?.classList.add('page_no-mobile-bar');
 }
 
+/**
+ * EVENTS
+ */
+
 practiceBtn?.addEventListener('click', () => {
   if (currentCard) {
-    location.hash = `#carousel/${currentCard.id}`;
+    location.hash = `#carousel/${currentCard._id}`;
   }
 });
 
 const mobilePracticeBtn = document.querySelector('.gallery__practice-btn--mobile');
 mobilePracticeBtn?.addEventListener('click', () => {
   if (currentCard) {
-    location.hash = `#carousel/${currentCard.id}`;
+    location.hash = `#carousel/${currentCard._id}`;
   }
 });
 
@@ -154,5 +195,8 @@ homeNewCardBtn?.addEventListener('click', () => {
 });
 
 window.addEventListener('hashchange', handleRouting);
-window.addEventListener('load', handleRouting);
-handleRouting();
+
+// INITIALIZATION
+document.addEventListener("DOMContentLoaded", () => {
+  renderHomeView();
+});
