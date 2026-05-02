@@ -16,6 +16,7 @@ const deckSection = document.querySelector('#deck-view');
 const carouselSection = document.querySelector('#carousel-view');
 const notFoundSection = document.querySelector('#not-found');
 const newDeckSection = document.querySelector('#new-deck-view');
+const aboutSection = document.querySelector('#about');
 const mainContent = document.querySelector('.page__main-content');
 const pageElement = document.querySelector('.page');
 
@@ -26,7 +27,7 @@ const practiceBtn = deckSection?.querySelector('.gallery__practice-btn');
  */
 
 function showView(currentSection, displayValue) {
-  const sections = [homeSection, deckSection, carouselSection, notFoundSection, newDeckSection];
+  const sections = [homeSection, deckSection, carouselSection, notFoundSection, newDeckSection, aboutSection];
   sections.forEach((section) => {
     if (section) section.style.display = 'none';
   });
@@ -146,9 +147,13 @@ async function handleRouting() {
   if (hash === '#home' || hash === '' || hash === '#') {
     showView(homeSection, 'flex');
     updateMobileBar('home');
-    // Removed renderHomeView() from here to avoid loops
   } 
-  else if (hash === '#new-deck-view') {
+  /* ADDED ABOUT SECTION LOGIC */
+  else if (hash === '#about') {
+    showView(aboutSection, 'block');
+  }
+  /* ------------------------- */
+  else if (hash === '#new-deck-view' || hash === '#new-deck') {
     showView(newDeckSection, 'block');
     pageElement?.classList.add('page_no-mobile-bar');
   }
@@ -164,7 +169,7 @@ async function handleRouting() {
       show404();
     }
   }
-  else if (hash.startsWith('#carousel/')) {
+  else if (hash.startsWith('#carousel/') || hash.startsWith('#practice/')) {
     const cardId = hash.split('/')[1];
     const card = getDeckByID(cardId);
 
