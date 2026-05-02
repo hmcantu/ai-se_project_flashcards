@@ -109,3 +109,84 @@
 .card__delete-btn:hover {
     opacity: 1;
 }
+
+.card__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+.card__form-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card__input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    color: #1a1a1a;
+    resize: none;
+    outline: none;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.card__input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.card__edit-btn {
+    background-image: url("../images/pencil.svg");
+}
+
+.card__btn_type_flip {
+    background-image: url("../images/flip.svg");
+    width: 34px;
+    height: 34px;
+    border: none;
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.card__btn_type_check {
+    background-image: url("../images/check.svg");
+    width: 34px;
+    height: 34px;
+    border: none;
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+    pointer-events: auto;
+}
+
+.card__btn_type_check:hover {
+    opacity: 1;
+}
+
+.card_type_form {
+    cursor: default;
+}
+
+.card__btn_type_flip,
+.card__btn_type_check {
+    pointer-events: auto;
+}

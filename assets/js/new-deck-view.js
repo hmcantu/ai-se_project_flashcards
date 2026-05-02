@@ -6,12 +6,16 @@ const errorMsgElement = document.querySelector("#error-message");
 const closeErrorBtn = document.querySelector("#close-error-modal");
 
 closeErrorBtn.addEventListener("click", () => {
-  errorModal.classList.remove("modal_visible");
+  errorModal.classList.remove("modal_opened");
 });
 
+/**
+ * Displays an error message using the modal.
+ * @param {string} message 
+ */
 function showError(message) {
   errorMsgElement.textContent = message;
-  errorModal.classList.add("modal_visible");
+  errorModal.classList.add("modal_opened");
 }
 
 function validateName(name) {
@@ -29,22 +33,14 @@ function parseJSON(jsonString) {
   }
 }
 
-function slugify(str) {
-  return str
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
 function normalizeColor(color) {
   const colorMap = {
     green: "#64d583",
-    blue: "#3b82f6",
-    purple: "#a855f7",
-    pink: "#ec4899",
-    orange: "#f97316",
-    yellow: "#eab308"
+    blue: "#91A8F9",
+    purple: "#aa8ef0",
+    pink: "#EE92D7",
+    orange: "#ee955e",
+    yellow: "#f5d770"
   };
   return colorMap[color] || "#64d583";
 }
@@ -75,30 +71,29 @@ newDeckForm.addEventListener("submit", (e) => {
     return showError("Name must be a string between 2 and 80 characters.");
   }
 
-  if (!Array.isArray(jsonData.cards)) {
-    return showError("The 'cards' field must be an array.");
-  }
+  // FIX: Support both { "cards": [] } AND raw [{}, {}]
+  const cardsArray = Array.isArray(jsonData) ? jsonData : jsonData.cards;
 
-  if (typeof jsonData.color === "string") {
-    if (jsonData.color.toLowerCase() !== colorValue.toLowerCase()) {
-      return showError(`The color in the JSON (${jsonData.color}) does not match the selected color (${colorValue}).`);
-    }
+  if (!Array.isArray(cardsArray)) {
+    return showError("The JSON must be an array of cards or contain a 'cards' field.");
   }
 
   const newDeckData = {
     name: validatedName,
     color: colorValue,
-    cards: jsonData.cards,
+    cards: cardsArray,
   };
 
   addDeck(newDeckData)
     .then((newDeckFromServer) => {
       fetchedDecks.push(newDeckFromServer);
+      // Navigate to the new deck view
       window.location.hash = "#deck/" + newDeckFromServer._id;
       e.target.reset();
+      submitBtn.disabled = true; // Re-disable after success
     })
     .catch((err) => {
-      showError("Failed to save the deck. Please check your JSON format.");
+      showError("Failed to save the deck. Check your internet connection or JSON structure.");
       console.error(err);
     });
 });
@@ -108,17 +103,15 @@ const textArea = newDeckForm.querySelector('textarea[name="cards"]');
 const colorInputs = newDeckForm.querySelectorAll('input[name="color"]');
 
 const handleFormInput = () => {
-  // If name has 2+ chars and there is text in the JSON area, enable the button
-  if (nameInput.value.length >= 2 && textArea.value.length > 0) {
+  if (nameInput.value.trim().length >= 2 && textArea.value.trim().length > 0) {
     enableSubmitBtn();
+  } else {
+    submitBtn.disabled = true;
   }
 };
 
-// Listen for typing in the name and JSON fields
 nameInput.addEventListener("input", handleFormInput);
 textArea.addEventListener("input", handleFormInput);
-
-// Listen for when a color radio button is clicked
 colorInputs.forEach((input) => {
   input.addEventListener("change", handleFormInput);
 });

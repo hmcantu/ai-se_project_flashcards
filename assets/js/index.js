@@ -26,6 +26,11 @@ const practiceBtn = deckSection?.querySelector('.gallery__practice-btn');
  * UTILS
  */
 
+/**
+ * Toggles the visibility of page sections by hiding all and showing the target.
+ * @param {HTMLElement} currentSection - The DOM element of the section to display.
+ * @param {string} displayValue - The CSS display value (e.g., 'flex', 'block').
+ */
 function showView(currentSection, displayValue) {
   const sections = [homeSection, deckSection, carouselSection, notFoundSection, newDeckSection, aboutSection];
   sections.forEach((section) => {
@@ -34,6 +39,10 @@ function showView(currentSection, displayValue) {
   if (currentSection) currentSection.style.display = displayValue;
 }
 
+/**
+ * Updates the mobile navigation bar UI based on the current active view.
+ * @param {string} view - The name of the view (e.g., 'home', 'deck').
+ */
 function updateMobileBar(view) {
   const mobileNewCardBtn = document.querySelector('.gallery__new-card-btn--mobile');
   const deckViewModifier = 'gallery__new-card-btn_location_deck-view';
@@ -47,10 +56,18 @@ function updateMobileBar(view) {
   }
 }
 
+/**
+ * Updates the globally tracked current card/deck object.
+ * @param {Object} deck - The deck object to set as current.
+ */
 const updateCurrentCard = (deck) => {
   currentCard = deck;
 };
 
+/**
+ * Displays an error message to the user via a modal.
+ * @param {string} message - The error message to display.
+ */
 export function showError(message) {
   const errorModal = document.querySelector('#error-modal');
   const errorMessage = document.querySelector('#error-message');
@@ -70,6 +87,11 @@ export function showError(message) {
  * RENDERING
  */
 
+/**
+ * Creates and configures a deck card DOM element from a template.
+ * @param {Object} item - The deck data object.
+ * @returns {HTMLElement} The populated card element.
+ */
 function createCardEl(item) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const titleEl = cardElement.querySelector('.card__title');
@@ -112,6 +134,9 @@ function createCardEl(item) {
   return cardElement;
 }
 
+/**
+ * Fetches decks from the API and renders them in the gallery list.
+ */
 function renderHomeView() {
   if (!cardList) return;
   cardList.innerHTML = ""; 
@@ -139,6 +164,10 @@ function renderHomeView() {
  * ROUTING
  */
 
+/**
+ * Main router function that handles view transitions based on the URL hash.
+ * @returns {Promise<void>}
+ */
 async function handleRouting() {
   const hash = location.hash;
   mainContent?.classList.remove('page__main-content_location_carousel');
@@ -187,6 +216,9 @@ async function handleRouting() {
   }
 }
 
+/**
+ * Displays the 404 Not Found section.
+ */
 function show404() {
   showView(notFoundSection, 'block');
   pageElement?.classList.add('page_no-mobile-bar');

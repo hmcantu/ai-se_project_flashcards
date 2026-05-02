@@ -60,14 +60,14 @@
         </section>
 
         <section class="about" id="about" style="display: none;">
-  <h2 class="about__title">About the Flash Cards App</h2>
-  <p class="about__text">
-    In this Flash Cards App, you can create your decks of cards to memorize study materials and practice them. It’s a student project for the TripleTen AI-Assisted Software Engineering course.
-  </p>
-  <p class="about__text">
-    When creating a deck of cards, you have to paste/type JSON following this schema:
-  </p>
-  <pre class="about__pre"><code class="about__code">{
+            <h2 class="about__title">About the Flash Cards App</h2>
+            <p class="about__text">
+                In this Flash Cards App, you can create your decks of cards to memorize study materials and practice them. It’s a student project for the TripleTen AI-Assisted Software Engineering course.
+            </p>
+            <p class="about__text">
+                When creating a deck of cards, you have to paste/type JSON following this schema:
+            </p>
+            <pre class="about__pre"><code class="about__code">{
   "name": "Name",
   "cards": [
     {
@@ -77,39 +77,39 @@
     ...
   ]
 }</code></pre>
-</section>
+        </section>
 
         <section class="new-deck-view" id="new-deck-view" style="display: none;">
             <h2 class="new-deck-view__title">New Deck</h2>
             <form class="new-deck-view__form" id="new-deck-form">
-              <label class="new-deck-view__label">
-                Deck Name
-                <input type="text" name="name" class="new-deck-view__input" placeholder="Enter deck name" required />
-              </label>
-              <fieldset class="color-picker">
-                <legend class="color-picker__legend">Pick the deck color</legend>
-                <div class="color-picker__options">
-                  <input type="radio" name="color" value="green" id="color-green" class="color-picker__radio" checked>
-                  <label for="color-green" class="color-picker__label color-picker__label_color_green"></label>
-                  <input type="radio" name="color" value="blue" id="color-blue" class="color-picker__radio">
-                  <label for="color-blue" class="color-picker__label color-picker__label_color_blue"></label>
-                  <input type="radio" name="color" value="purple" id="color-purple" class="color-picker__radio">
-                  <label for="color-purple" class="color-picker__label color-picker__label_color_purple"></label>
-                  <input type="radio" name="color" value="pink" id="color-pink" class="color-picker__radio">
-                  <label for="color-pink" class="color-picker__label color-picker__label_color_pink"></label>
-                  <input type="radio" name="color" value="orange" id="color-orange" class="color-picker__radio">
-                  <label for="color-orange" class="color-picker__label color-picker__label_color_orange"></label>
-                  <input type="radio" name="color" value="yellow" id="color-yellow" class="color-picker__radio">
-                  <label for="color-yellow" class="color-picker__label color-picker__label_color_yellow"></label>
-                </div>
-              </fieldset>
-              <label class="new-deck-view__label">
-                Write the JSON array of cards
-                <textarea class="new-deck-view__textarea" name="cards" placeholder='{ "cards": [] }' required></textarea>
-              </label>
-              <button type="submit" class="new-deck-view__submit-btn" disabled>Create the Deck</button>
+                <label class="new-deck-view__label">
+                    Deck Name
+                    <input type="text" name="name" class="new-deck-view__input" placeholder="Enter deck name" required />
+                </label>
+                <fieldset class="color-picker">
+                    <legend class="color-picker__legend">Pick the deck color</legend>
+                    <div class="color-picker__options">
+                        <input type="radio" name="color" value="green" id="color-green" class="color-picker__radio" checked>
+                        <label for="color-green" class="color-picker__label color-picker__label_color_green"></label>
+                        <input type="radio" name="color" value="blue" id="color-blue" class="color-picker__radio">
+                        <label for="color-blue" class="color-picker__label color-picker__label_color_blue"></label>
+                        <input type="radio" name="color" value="purple" id="color-purple" class="color-picker__radio">
+                        <label for="color-purple" class="color-picker__label color-picker__label_color_purple"></label>
+                        <input type="radio" name="color" value="pink" id="color-pink" class="color-picker__radio">
+                        <label for="color-pink" class="color-picker__label color-picker__label_color_pink"></label>
+                        <input type="radio" name="color" value="orange" id="color-orange" class="color-picker__radio">
+                        <label for="color-orange" class="color-picker__label color-picker__label_color_orange"></label>
+                        <input type="radio" name="color" value="yellow" id="color-yellow" class="color-picker__radio">
+                        <label for="color-yellow" class="color-picker__label color-picker__label_color_yellow"></label>
+                    </div>
+                </fieldset>
+                <label class="new-deck-view__label">
+                    Write the JSON array of cards
+                    <textarea class="new-deck-view__textarea" name="cards" placeholder='{ "cards": [] }' required></textarea>
+                </label>
+                <button type="submit" class="new-deck-view__submit-btn" disabled>Create the Deck</button>
             </form>
-          </section>
+        </section>
 
         <section id="not-found" style="display: none;">
             <h2 class="gallery__title">404 - Not Found</h2>
@@ -144,22 +144,22 @@
     </footer> 
 
     <div id="error-modal" class="modal">
-      <div class="modal__container">
-        <h2 class="modal__title">Invalid Input</h2>
-        <p id="error-message" class="modal__text"></p>
-        <button id="close-error-modal" class="modal__btn" type="button">Dismiss</button>
-      </div>
+        <div class="modal__container">
+            <h2 class="modal__title">Invalid Input</h2>
+            <p id="error-message" class="modal__text"></p>
+            <button id="close-error-modal" class="modal__btn" type="button">Dismiss</button>
+        </div>
     </div>
 
     <div id="delete-modal" class="modal">
-      <div class="modal__container">
-        <h2 class="modal__title">Are you sure?</h2>
-        <p class="modal__text">This action cannot be undone. This deck will be permanently deleted.</p>
-        <div class="modal__buttons">
-          <button id="confirm-delete" class="modal__btn modal__confirm-btn" type="button">Yes, Delete</button>
-          <button id="cancel-delete" class="modal__btn modal__cancel-btn" type="button">Cancel</button>
+        <div class="modal__container">
+            <h2 class="modal__title">Are you sure?</h2>
+            <p class="modal__text">This action cannot be undone. This deck will be permanently deleted.</p>
+            <div class="modal__buttons">
+                <button id="confirm-delete" class="modal__btn modal__confirm-btn" type="button">Yes, Delete</button>
+                <button id="cancel-delete" class="modal__btn modal__cancel-btn" type="button">Cancel</button>
+            </div>
         </div>
-      </div>
     </div>
 
     <script src="./assets/js/index.js" type="module"></script>
