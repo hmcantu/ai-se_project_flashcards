@@ -36,7 +36,8 @@ The project has transitioned from a static prototype to a full-stack dynamic app
 
 ## 🎥 Project Pitch
 
-Watch a walkthrough of the features and technical challenges: [Project Demo Video](https://www.loom.com/share/f49fc8621040481f93910c5f5f7966af)
+Watch a walkthrough of the features, technical challenges, and the final API implementation: 
+[Project Demo Video](https://www.loom.com/share/b86a4c7aa22942c798bea5b45bf8f8b4)
 
 ## 🔗 Deployed Site
 
