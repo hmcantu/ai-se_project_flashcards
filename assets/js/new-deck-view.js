@@ -1,4 +1,5 @@
 import { fetchedDecks } from "./decks.js";
+import { addDeck } from "./api.js";
 
 const errorModal = document.querySelector("#error-modal");
 const errorMsgElement = document.querySelector("#error-message");
@@ -84,16 +85,40 @@ newDeckForm.addEventListener("submit", (e) => {
     }
   }
 
-  const id = `${slugify(validatedName)}-${Date.now()}`;
-
-  const newDeck = {
-    id: id,
+  const newDeckData = {
     name: validatedName,
     color: colorValue,
     cards: jsonData.cards,
   };
 
-  fetchedDecks.push(newDeck);
-  window.location.hash = "#deck/" + id;
-  e.target.reset();
+  addDeck(newDeckData)
+    .then((newDeckFromServer) => {
+      fetchedDecks.push(newDeckFromServer);
+      window.location.hash = "#deck/" + newDeckFromServer._id;
+      e.target.reset();
+    })
+    .catch((err) => {
+      showError("Failed to save the deck. Please check your JSON format.");
+      console.error(err);
+    });
+});
+
+const nameInput = newDeckForm.querySelector('input[name="name"]');
+const textArea = newDeckForm.querySelector('textarea[name="cards"]');
+const colorInputs = newDeckForm.querySelectorAll('input[name="color"]');
+
+const handleFormInput = () => {
+  // If name has 2+ chars and there is text in the JSON area, enable the button
+  if (nameInput.value.length >= 2 && textArea.value.length > 0) {
+    enableSubmitBtn();
+  }
+};
+
+// Listen for typing in the name and JSON fields
+nameInput.addEventListener("input", handleFormInput);
+textArea.addEventListener("input", handleFormInput);
+
+// Listen for when a color radio button is clicked
+colorInputs.forEach((input) => {
+  input.addEventListener("change", handleFormInput);
 });

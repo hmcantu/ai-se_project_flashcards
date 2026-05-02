@@ -29,3 +29,11 @@ export function deleteDeck(id) {
     headers: headers,
   }).then(processResponse);
 }
+
+export function addDeck(deckData) {
+  return fetch(`${baseUrl}/decks`, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(deckData),
+  }).then(processResponse);
+}

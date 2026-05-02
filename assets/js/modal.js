@@ -1,34 +1,47 @@
-const modal = document.querySelector('.modal');
-const cancelBtn = modal?.querySelector('.modal__cancel-btn');
-const confirmBtn = modal?.querySelector('.modal__confirm-btn');
+const deleteModal = document.querySelector("#delete-modal");
+const confirmBtn = document.querySelector("#confirm-delete");
+const cancelBtn = document.querySelector("#cancel-delete");
 
-export function closeModal() {
-  if (modal) {
-    modal.classList.remove('modal_opened');
+let onConfirmCallback = null;
+
+export function openModal(onConfirm) {
+  onConfirmCallback = onConfirm;
+  const deleteModal = document.querySelector("#delete-modal");
+  
+  if (deleteModal) {
+    deleteModal.classList.add("modal_opened");
+    setupModalListeners(deleteModal);
   }
 }
 
-export function openModal(action) {
-  if (!modal || !confirmBtn) return;
-
-  modal.classList.add('modal_opened');
-
-  const handleConfirm = () => {
-    action();
-    closeModal();
-  };
-
-  confirmBtn.addEventListener('click', handleConfirm, { once: true });
+export function closeModal() {
+  const deleteModal = document.querySelector("#delete-modal");
+  if (deleteModal) {
+    deleteModal.classList.remove("modal_opened");
+  }
+  onConfirmCallback = null;
 }
 
-if (cancelBtn) {
-  cancelBtn.addEventListener('click', closeModal);
-}
+function setupModalListeners(modal) {
+  const confirmBtn = modal.querySelector("#confirm-delete");
+  const cancelBtn = modal.querySelector("#cancel-delete");
 
-if (modal) {
-  modal.addEventListener('click', (e) => {
+  if (confirmBtn) {
+    confirmBtn.onclick = () => {
+      if (onConfirmCallback) {
+        onConfirmCallback();
+      }
+      closeModal();
+    };
+  }
+
+  if (cancelBtn) {
+    cancelBtn.onclick = closeModal;
+  }
+
+  modal.onclick = (e) => {
     if (e.target === modal) {
       closeModal();
     }
-  });
+  };
 }

@@ -13,7 +13,7 @@
 <body class="page">
     <header class="header">
         <h1 class="header__title">
-            <a href="#home" class="header__link">Flash Cards</a>
+            <a href="#home" class="header__link-main">Flash Cards</a>
         </h1>
         <nav class="nav">
             <ul class="nav__links">
@@ -62,40 +62,31 @@
         <section class="new-deck-view" id="new-deck-view" style="display: none;">
             <h2 class="new-deck-view__title">New Deck</h2>
             <form class="new-deck-view__form" id="new-deck-form">
-              
               <label class="new-deck-view__label">
                 Deck Name
                 <input type="text" name="name" class="new-deck-view__input" placeholder="Enter deck name" required />
               </label>
-
               <fieldset class="color-picker">
                 <legend class="color-picker__legend">Pick the deck color</legend>
                 <div class="color-picker__options">
                   <input type="radio" name="color" value="green" id="color-green" class="color-picker__radio" checked>
                   <label for="color-green" class="color-picker__label color-picker__label_color_green"></label>
-          
                   <input type="radio" name="color" value="blue" id="color-blue" class="color-picker__radio">
                   <label for="color-blue" class="color-picker__label color-picker__label_color_blue"></label>
-          
                   <input type="radio" name="color" value="purple" id="color-purple" class="color-picker__radio">
                   <label for="color-purple" class="color-picker__label color-picker__label_color_purple"></label>
-          
                   <input type="radio" name="color" value="pink" id="color-pink" class="color-picker__radio">
                   <label for="color-pink" class="color-picker__label color-picker__label_color_pink"></label>
-          
                   <input type="radio" name="color" value="orange" id="color-orange" class="color-picker__radio">
                   <label for="color-orange" class="color-picker__label color-picker__label_color_orange"></label>
-          
                   <input type="radio" name="color" value="yellow" id="color-yellow" class="color-picker__radio">
                   <label for="color-yellow" class="color-picker__label color-picker__label_color_yellow"></label>
                 </div>
               </fieldset>
-          
               <label class="new-deck-view__label">
                 Write the JSON array of cards
                 <textarea class="new-deck-view__textarea" name="cards" placeholder='{ "cards": [] }' required></textarea>
               </label>
-          
               <button type="submit" class="new-deck-view__submit-btn" disabled>Create the Deck</button>
             </form>
           </section>
@@ -107,7 +98,7 @@
         </section>
 
         <template id="card-template">
-            <li class="card card_color_green">
+            <li class="card">
                 <a href="#" class="card__link"></a>
                 <h3 class="card__title"></h3>
                 <div class="card__row">
@@ -118,7 +109,7 @@
         </template>
 
         <template id="flashcard-template">
-            <li class="card card_color_green">
+            <li class="card">
                 <h3 class="card__title"></h3>
                 <div class="card__row">
                     <button type="button" class="card__edit-btn" aria-label="Edit flashcard"></button>
@@ -133,10 +124,21 @@
     </footer> 
 
     <div id="error-modal" class="modal">
-      <div class="modal__content">
+      <div class="modal__container">
         <h2 class="modal__title">Invalid Input</h2>
         <p id="error-message" class="modal__text"></p>
-        <button id="close-error-modal" class="button modal__button" type="button">Dismiss</button>
+        <button id="close-error-modal" class="modal__btn" type="button">Dismiss</button>
+      </div>
+    </div>
+
+    <div id="delete-modal" class="modal">
+      <div class="modal__container">
+        <h2 class="modal__title">Are you sure?</h2>
+        <p class="modal__text">This action cannot be undone. This deck will be permanently deleted.</p>
+        <div class="modal__buttons">
+          <button id="confirm-delete" class="modal__btn modal__confirm-btn" type="button">Yes, Delete</button>
+          <button id="cancel-delete" class="modal__btn modal__cancel-btn" type="button">Cancel</button>
+        </div>
       </div>
     </div>
 

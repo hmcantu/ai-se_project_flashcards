@@ -84,26 +84,24 @@ function createCardEl(item) {
   cardElement.classList.add(`card_color_${colorName}`);
   
   deleteBtn.addEventListener('click', (e) => {
-  e.stopPropagation(); 
-  openModal(() => {
-    // 1. Call the API
-    deleteDeck(item._id)
-      .then(() => {
-        // 2. Remove from the DOM
-        cardElement.remove();
-
-        // 3. Remove from the local cache (fetchedDecks)
-        const index = fetchedDecks.findIndex((d) => d._id === item._id);
-        if (index !== -1) {
-          fetchedDecks.splice(index, 1);
-        }
-      })
-      .catch((err) => {
-        showError("Failed to delete the deck. Please try again.");
-        console.error(err);
-      });
+    e.preventDefault(); 
+    e.stopPropagation();
+    
+    console.log("Delete button clicked for:", item.name); // Debug log
+    
+    openModal(() => {
+      deleteDeck(item._id)
+        .then(() => {
+          cardElement.remove();
+          const index = fetchedDecks.findIndex((d) => d._id === item._id);
+          if (index !== -1) fetchedDecks.splice(index, 1);
+        })
+        .catch((err) => {
+          showError("Failed to delete the deck.");
+          console.error(err);
+        });
+    });
   });
-});
 
   cardElement.addEventListener('click', (e) => {
     if (e.target.closest('.card__delete-btn')) return;
