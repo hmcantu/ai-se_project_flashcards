@@ -11,13 +11,19 @@ closeErrorBtn.addEventListener("click", () => {
 
 /**
  * Displays an error message using the modal.
- * @param {string} message 
+ * @param {string} message - The error message to display to the user.
+ * @returns {void}
  */
 function showError(message) {
   errorMsgElement.textContent = message;
   errorModal.classList.add("modal_opened");
 }
 
+/**
+ * Validates that the deck name is a string between 2 and 80 characters.
+ * @param {string} name - The name to be validated.
+ * @returns {string|null} The validated name string, or null if invalid.
+ */
 function validateName(name) {
   if (typeof name !== "string" || name.length < 2 || name.length > 80) {
     return null;
@@ -25,6 +31,11 @@ function validateName(name) {
   return name;
 }
 
+/**
+ * Attempts to parse a string into a JSON object.
+ * @param {string} jsonString - The string to parse.
+ * @returns {Object|Array|null} The parsed JSON data or null if parsing fails.
+ */
 function parseJSON(jsonString) {
   try {
     return JSON.parse(jsonString);
@@ -33,6 +44,11 @@ function parseJSON(jsonString) {
   }
 }
 
+/**
+ * Maps a selection color name to a specific hex code.
+ * @param {string} color - The color name from the form (e.g., "blue").
+ * @returns {string} The corresponding hex color code.
+ */
 function normalizeColor(color) {
   const colorMap = {
     green: "#64d583",
@@ -48,6 +64,10 @@ function normalizeColor(color) {
 const newDeckForm = document.querySelector("#new-deck-form");
 const submitBtn = newDeckForm.querySelector(".new-deck-view__submit-btn");
 
+/**
+ * Enables the form submit button by setting disabled to false.
+ * @returns {void}
+ */
 export function enableSubmitBtn() {
   if (submitBtn) {
     submitBtn.disabled = false;
@@ -102,6 +122,10 @@ const nameInput = newDeckForm.querySelector('input[name="name"]');
 const textArea = newDeckForm.querySelector('textarea[name="cards"]');
 const colorInputs = newDeckForm.querySelectorAll('input[name="color"]');
 
+/**
+ * Checks form inputs and enables/disables the submit button based on validity.
+ * @returns {void}
+ */
 const handleFormInput = () => {
   if (nameInput.value.trim().length >= 2 && textArea.value.trim().length > 0) {
     enableSubmitBtn();

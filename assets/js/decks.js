@@ -10,3 +10,15 @@ export const fetchedDecks = [];
 export function getDeckByID(deckId) {
   return fetchedDecks.find((deck) => deck._id === deckId);
 }
+
+/**
+ * Removes a deck from the global fetchedDecks array by searching for its _id.
+ * @param {string} deckId - The unique ID of the deck to be removed.
+ * @returns {void}
+ */
+export function removeDeckById(deckId) {
+  const index = fetchedDecks.findIndex((deck) => deck._id === deckId);
+  if (index !== -1) {
+    fetchedDecks.splice(index, 1);
+  }
+}

@@ -4,7 +4,7 @@ import { renderDeckView } from './deck-view.js';
 import { openModal } from './modal.js';
 import { enableSubmitBtn } from "./new-deck-view.js";
 import { getDecks, getDeckById, deleteDeck } from "./api.js";
-import { fetchedDecks, getDeckByID } from "./decks.js";
+import { fetchedDecks, getDeckByID, removeDeckById } from "./decks.js";
 
 let currentCard = null; 
 
@@ -110,14 +110,14 @@ function createCardEl(item) {
     e.preventDefault(); 
     e.stopPropagation();
     
-    console.log("Delete button clicked for:", item.name); // Debug log
+    console.log("Delete button clicked for:", item.name);
     
     openModal(() => {
       deleteDeck(item._id)
         .then(() => {
+          // UI update
           cardElement.remove();
-          const index = fetchedDecks.findIndex((d) => d._id === item._id);
-          if (index !== -1) fetchedDecks.splice(index, 1);
+          removeDeckById(item._id); 
         })
         .catch((err) => {
           showError("Failed to delete the deck.");
